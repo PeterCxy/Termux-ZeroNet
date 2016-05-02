@@ -4,7 +4,7 @@ if [[ -z "$ZERONET_HOME" ]]; then
 	echo "--- Installing ZeroNet ---"
 	termux-setup-storage
 	apt-get -y update && apt-get -y upgrade
-	apt-get install -y curl make python2-dev git gcc grep c-ares-dev libev-dev
+	apt-get install -y curl make python2-dev git gcc grep c-ares-dev libev-dev openssl-tool
 	export LIBEV_EMBED=false
 	export CARES_EMBED=false
 	pip2 install gevent msgpack-python
