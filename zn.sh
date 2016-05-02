@@ -2,12 +2,12 @@
 
 if [[ -z "$ZERONET_HOME" ]]; then
 	echo "--- Installing ZeroNet ---"
+	termux-setup-storage
 	apt-get -y update && apt-get -y upgrade
 	apt-get install -y curl make python2-dev git gcc grep c-ares-dev libev-dev
 	export LIBEV_EMBED=false
 	export CARES_EMBED=false
 	pip2 install gevent msgpack-python
-	termux-setup-storage
 
 	if [[ ! -d ~/storage/shared/ZeroNet ]]; then
 		mkdir ~/storage/shared/ZeroNet
