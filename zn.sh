@@ -3,19 +3,23 @@
 if [[ -z "$ZERONET_HOME" ]]; then
 	echo "--- Installing ZeroNet ---"
 	termux-setup-storage
-	apt-get -y update && apt-get -y upgrade
-	apt-get install -y curl make python2-dev git gcc grep c-ares-dev libev-dev openssl-tool
+	apt-get -y update && apt-get -y upgrade 
+	apt install clang -y 
+	apt-get install -y curl make python2-dev git clang grep c-ares-dev libev-dev openssl-tool
 	export LIBEV_EMBED=false
 	export CARES_EMBED=false
+	pip2 install --upgrade pip && pip2 install https://github.com/fornwall/greenlet/archive/master.zip
+	EMBED=0 pip2 install gevent
 	pip2 install gevent msgpack-python
 
-	if [[ ! -d ~/storage/shared/ZeroNet ]]; then
-		mkdir ~/storage/shared/ZeroNet
-		git clone https://github.com/HelloZeroNet/ZeroNet.git ~/storage/shared/ZeroNet
+	if [[ ! -d ~/ZeroNet ]]; then
+		cd ~
+		curl -L https://github.com/HelloZeroNet/ZeroNet/archive/master.tar.gz | tar xz
+		mv ~/ZeroNet-master ~/ZeroNet
+
 	fi
 
-	cp "$0" ~/zn.sh
-	echo 'export ZERONET_HOME=~/storage/shared/ZeroNet' >> ~/.bashrc
+	echo 'export ZERONET_HOME=~/ZeroNet' >> ~/.bashrc
 	echo "alias zn=\"bash ~/zn.sh\"" >> ~/.bashrc
 	source ~/.bashrc
 
