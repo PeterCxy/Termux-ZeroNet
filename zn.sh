@@ -4,15 +4,12 @@ if [[ -z "$ZERONET_HOME" ]]; then
 	echo "--- Installing ZeroNet ---"
 	termux-setup-storage
 	apt-get -y update && apt-get -y upgrade 
-	apt install clang -y 
 	apt-get install -y curl make python2-dev git clang grep c-ares-dev libev-dev openssl-tool
 	export LIBEV_EMBED=false
 	export CARES_EMBED=false
 	export CONFIG_SHELL=$PREFIX/bin/sh
 	export TMPDIR=$PREFIX/tmp
-	pip2 install --upgrade pip && pip2 install https://github.com/fornwall/greenlet/archive/master.zip
-	EMBED=0 pip2 install gevent
-	pip2 install gevent msgpack-python
+	EMBED=0 pip2 install gevent msgpack-python
 
 	if [[ ! -d ~/ZeroNet ]]; then
 		cd ~
